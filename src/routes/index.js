@@ -1,6 +1,15 @@
 import AdminLayout from "../components/layout/admin/AdminLayout";
-const admin = [], owner = [], guest = [];
+import { adminRoute } from "./adminRoutes";
 
+const admin = [...adminRoute], owner = [], guest = [];
+adminRoute.map((e) => {
+    if (e.subRoute.length) {
+        e.subRoute.map((sub) => {
+            admin.push({path: sub.path, element: sub.element})
+        })
+    }
+    else admin.push({path: e.path, element: e.element})
+})
 export const routes = [
     {
         path: '/admin',
