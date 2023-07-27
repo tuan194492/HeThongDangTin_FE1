@@ -1,4 +1,5 @@
 import AdminLayout from "../components/layout/admin/AdminLayout";
+import AdminLoginPage from "../components/pages/admin/Login";
 import { adminRoute } from "./adminRoutes";
 
 const admin = [...adminRoute], owner = [], guest = [];
@@ -18,7 +19,7 @@ export const routes = [
     },
     {
         path: '/admin/login',
-        element: <AdminLayout/>,
+        element: <AdminLoginPage/>,
     },
     {
         path: '/owner',
