@@ -8,11 +8,10 @@ const defaultAuthContext = {
   user: null,
 };
 
-export const AuthContext = createContext < IAuthContext > defaultAuthContext;
+export const AuthContext = React.createContext(defaultAuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] =
-    (useState < string) | (null > localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [role, setRole] = useState(
     localStorage.getItem("role") !== null ? localStorage.getItem("role") : ""
   );

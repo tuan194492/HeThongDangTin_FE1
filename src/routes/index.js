@@ -1,14 +1,15 @@
+import AdminLayout from "../components/layout/admin/AdminLayout";
 const admin = [], owner = [], guest = [];
 
 export const routes = [
     {
         path: '/admin',
-        element: <div/>,
+        element: <AdminLayout/>,
         children: admin
     },
     {
         path: '/admin/login',
-        element: <div/>,
+        element: <AdminLayout/>,
     },
     {
         path: '/owner',
@@ -28,6 +29,6 @@ export const routes = [
     {
         path: '/',
         element: <div/>,
-        children: renter
+        children: guest
     }
 ];
