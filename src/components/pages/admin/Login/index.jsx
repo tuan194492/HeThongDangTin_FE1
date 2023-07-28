@@ -22,8 +22,9 @@ export default function AdminLoginPage() {
     const onSubmit = async (data) => {
         const response = await adminLogin(data);
         if (response.success) {
+            console.log(response.data)
             const { token, user, role} = response.data
-            if (user.role === RoleEnum.ADMIN) {
+            if (role === RoleEnum.ADMIN) {
                 toast.success(response.message);
                 setAuthData(token, role, user);
                 navigate('/admin');

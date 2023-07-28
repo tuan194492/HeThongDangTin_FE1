@@ -1,5 +1,5 @@
 import AdminLayout from "../components/layout/admin/AdminLayout";
-import AdminLoginPage from "../components/pages/admin/Login";
+import AdminLoginPage from "../components/pages/admin/login";
 import { adminRoute } from "./adminRoutes";
 
 const admin = [...adminRoute], owner = [], guest = [];

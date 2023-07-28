@@ -1,5 +1,5 @@
 import {IMAGES} from "../utils/images/images";
-
+import UserManage from "../components/pages/admin/user/UserManage";
 
 export const adminRoute = [
     {
@@ -14,7 +14,7 @@ export const adminRoute = [
         title: 'User',
         path: '/admin/user/',
         icon: IMAGES.icon.personal,
-        element: <div/>,
+        element: <UserManage/>,
         subRoute: [],
         able : 1
     },
