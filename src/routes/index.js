@@ -1,6 +1,10 @@
 import AdminLayout from "../components/layout/admin/AdminLayout";
-import AdminLoginPage from "../components/pages/admin/login";
+import AdminLoginPage from "../components/pages/admin/Login";
+import OwnerLayout from "../components/layout/owner/OwnerLayout";
+import OwnerLoginPage from "../components/pages/owner/Auth/OwnerLogin";
+import OwnerRegisterPage from "../components/pages/owner/Auth/OwnerRegister";
 import { adminRoute } from "./adminRoutes";
+import { ownerRoute } from "./ownerRoute";
 
 const admin = [...adminRoute], owner = [], guest = [];
 adminRoute.map((e) => {
@@ -10,6 +14,15 @@ adminRoute.map((e) => {
         })
     }
     else admin.push({path: e.path, element: e.element})
+})
+
+ownerRoute.map((e) => {
+    if (e.subRoute.length) {
+        e.subRoute.map((sub) => {
+            owner.push({path: sub.path, element: sub.element})
+        })
+    }
+    else owner.push({path: e.path, element: e.element})
 })
 export const routes = [
     {
@@ -23,18 +36,16 @@ export const routes = [
     },
     {
         path: '/owner',
-        element: <div/>,
+        element: <OwnerLayout/>,
         children: owner
     },
     {
         path: '/owner/login',
-        element: <div/>,
-        subRoute: []
+        element: <OwnerLoginPage/>
     },
     {
         path: '/owner/register',
-        element: <div/>,
-        subRoute: []
+        element: <OwnerRegisterPage/>
     },
     {
         path: '/',

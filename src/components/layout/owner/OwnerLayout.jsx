@@ -4,14 +4,14 @@ import {useState} from "react";
 import { WrapperAll, WrapperContent} from '../../../style/styled';
 import {Outlet} from "react-router-dom";
 
-export default function AdminLayout() {
+export default function OwnerLayout() {
     const [collapsed, setCollapsed] = useState(false);
     const handleCollapsedChange = () => {
         setCollapsed(!collapsed);
     };
     return (
         <WrapperAll>
-            <div className=''>     
+            <div className=''>
                 <Navbar />
                 <WrapperContent className='fixed top-[8%]'>
                     <Sidebar  menuCollapse = {collapsed} setMenuCollapse = {handleCollapsedChange} />
