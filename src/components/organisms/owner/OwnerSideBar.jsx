@@ -1,10 +1,7 @@
-import {adminExtraRoute, adminRoute} from '../../../routes/adminRoute';
-import {CollapseIconButton, collapseIcon, expandIcon, WrapperSideBar, WrapperOwnerSideBar} from '../../../style/styled';
-import {FC, useContext} from 'react';
+import {WrapperOwnerSideBar} from '../../../style/styled';
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarContent, SidebarFooter } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import {useNavigate} from "react-router-dom";
-import {AuthContext} from "../../../context/AuthContext";
 import {ownerRoute, ownerExtraRoute} from "../../../routes/ownerRoute";
 
 

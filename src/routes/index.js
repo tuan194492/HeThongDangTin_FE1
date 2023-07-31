@@ -4,7 +4,7 @@ import OwnerLayout from "../components/layout/owner/OwnerLayout";
 import OwnerLoginPage from "../components/pages/owner/Auth/OwnerLogin";
 import OwnerRegisterPage from "../components/pages/owner/Auth/OwnerRegister";
 import { adminRoute } from "./adminRoutes";
-import { ownerRoute } from "./ownerRoute";
+import { ownerRoute, ownerExtraRoute } from "./ownerRoute";
 
 const admin = [...adminRoute], owner = [], guest = [];
 adminRoute.map((e) => {
@@ -24,6 +24,11 @@ ownerRoute.map((e) => {
     }
     else owner.push({path: e.path, element: e.element})
 })
+
+ownerExtraRoute.map((e) => {
+    owner.push({path: e.path, element: e.element})
+})
+
 export const routes = [
     {
         path: '/admin',
