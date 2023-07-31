@@ -100,6 +100,6 @@ export default function PostManager() {
             </div>
         </div>
 
-        
+         
     )
 }
