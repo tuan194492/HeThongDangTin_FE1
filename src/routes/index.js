@@ -1,5 +1,5 @@
 import AdminLayout from "../components/layout/admin/AdminLayout";
-import AdminLoginPage from "../components/pages/admin/Login";
+import AdminLoginPage from "../components/pages/admin/login";
 import OwnerLayout from "../components/layout/owner/OwnerLayout";
 import OwnerLoginPage from "../components/pages/owner/Auth/OwnerLogin";
 import OwnerRegisterPage from "../components/pages/owner/Auth/OwnerRegister";

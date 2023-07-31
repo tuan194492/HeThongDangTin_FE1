@@ -19,13 +19,14 @@ export default function OwnerRegisterPage() {
 
     useEffect(() => {
         clearAuthData();
-    });
+    }, []);
 
     const onSubmit = async (data) => {
+        console.log("Submit")
         const createResult = await ownerRegister(data);
         if (createResult.success) {
             toast.success(createResult.message)
-            navigate('/user/login')
+            navigate('/owner/login')
         }
         else toast.error(createResult.message)
     };
@@ -46,161 +47,90 @@ export default function OwnerRegisterPage() {
                         <div className='grid grid-cols-3 gape-2'>
                             <div className='mb-3 col-span-2'>
                                 <div className='space-y-2 items-center'>
-                                    <div className=''> First name </div>
+                                    <div className=''> Name </div>
                                     <div className='px-2'>
                                         <input
-                                            id='firstName'
+                                            id='name'
                                             className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
                                             type='text'
-                                            placeholder='First name'
-                                            {...register('firstName', { required: true })}
+                                            placeholder='name'
+                                            {...register('name', { required: true })}
                                         />
                                     </div>
                                 </div>
-                                {errors?.firstName?.type === 'required' && <p>⚠ This field is required!</p>}
+                                {errors.name && errors.name.type === 'required' && <p>⚠ This field is required!</p>}
                             </div>
                             <div className='mb-3 col-span-1'>
                                 <div className='space-y-2 items-center'>
-                                    <div className=''> Last name </div>
+                                    <div className=''> Phone number </div>
                                     <div className='px-2'>
                                         <input
-                                            id='lastName'
+                                            id='phone_number'
                                             className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
                                             type='text'
-                                            placeholder='Last name'
-                                            {...register('lastName', { required: true })}
+                                            placeholder='Phone number'
+                                            {...register('phone_number', { required: true, minLength: 6 })}
                                         />
                                     </div>
                                 </div>
-                                {errors?.lastName?.type === 'required' && <p>⚠ This field is required!</p>}
+                                {errors.phone_number && errors.phone_number.type === 'required' && <p>⚠ This field is required!</p>}
+                                {errors.phone_number && errors.phone_number.type === 'minLength' && <p>⚠ Zalo number cannot be less than 6 characters!</p>}
                             </div>
                         </div>
                         <div className='grid grid-cols-3 gap-2'>
                             <div className='mb-3 col-span-1'>
                                 <div className='space-y-2 items-center'>
-                                    <div className=''> Contact no </div>
+                                    <div className=''> Zalo number </div>
                                     <div className='px-2'>
                                         <input
-                                            id='phone'
+                                            id='zalo_number'
                                             className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
                                             type='text'
-                                            placeholder='Contact number'
-                                            {...register('phone', { required: true, minLength: 6 })}
+                                            placeholder='Zalo number'
+                                            {...register('zalo_number', { required: true, minLength: 6 })}
                                         />
                                     </div>
                                 </div>
-                                {errors?.phone?.type === 'required' && <p>⚠ This field is required!</p>}
-                                {errors?.phone?.type === 'minLength' && <p>⚠ Password cannot be less than 6 characters!</p>}
+                                {errors.zalo_number && errors.zalo_number.type === 'required' && <p>⚠ This field is required!</p>}
+                                {errors.zalo_number && errors.zalo_number.type === 'minLength' && <p>⚠ Zalo number cannot be less than 6 characters!</p>}
                             </div>
+                            
                             <div className='mb-3 col-span-2'>
+                                <div className='mb-3 col-span-2'>
+                                    <div className='space-y-2 items-center'>
+                                        <div className=''> Facebook </div>
+                                        <div className='px-2'>
+                                            <input
+                                                id='facebook'
+                                                className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
+                                                type='text'
+                                                placeholder='Facebook'
+                                                {...register('facebook', { required: true })}
+                                            />
+                                        </div>
+                                    </div>
+                                    {errors.facebook && errors.facebook.type === 'required' && <p>⚠ This field is required!</p>}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='mb-3 col-span-2'>
                                 <div className='space-y-2 items-center'>
                                     <div className=''> Email address </div>
                                     <div className='px-2'>
                                         <input
                                             id='email'
                                             className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
-                                            type='text'
+                                            type='email'
                                             placeholder='Email'
                                             {...register('email', { required: true })}
                                         />
                                     </div>
                                 </div>
-                                {errors?.email?.type === 'required' && <p>⚠ This field is required!</p>}
+                                {errors.email && errors.email.type === 'required' && <p>⚠ This field is required!</p>}
                             </div>
-                        </div>
 
-                        <div className='grid grid-cols-3 gap-2'>
-                            <div className='mb-3 col-span-1'>
-                                <div className='space-y-2 items-center'>
-                                    <div className=''> Nationality </div>
-                                    <div className='px-2'>
-                                        <input
-                                            id='nationality'
-                                            className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
-                                            type='text'
-                                            placeholder='Nationality'
-                                            {...register('nationality', { required: true })}
-                                        />
-                                    </div>
-                                </div>
-                                {errors?.nationality?.type === 'required' && <p>⚠ This field is required!</p>}
-                            </div>
-                            <div className='mb-3 col-span-2'>
-                                <div className='space-y-2 items-center'>
-                                    <div className=''> Identity Number </div>
-                                    <div className='px-2'>
-                                        <input
-                                            id='identityNumber'
-                                            className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
-                                            type='text'
-                                            placeholder='Identity Number'
-                                            {...register('identityNumber', { required: true })}
-                                        />
-                                    </div>
-                                </div>
-                                {errors?.identityNumber?.type === 'required' && <p>⚠ This field is required!</p>}
-                            </div>
-                        </div>
-
-                        <div className='mb-3'>
-                            <div className='mb-3 col-span-2'>
-                                <div className='space-y-2 items-center'>
-                                    <div className=''> Address </div>
-                                    <div className='px-2'>
-                                        <input
-                                            id='address'
-                                            className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
-                                            type='text'
-                                            placeholder='Address'
-                                            {...register('address', { required: true })}
-                                        />
-                                    </div>
-                                </div>
-                                {errors?.address?.type === 'required' && <p>⚠ This field is required!</p>}
-                            </div>
-                        </div>
-
-                        <div className='mb-3'>
-                            <div className='space-y-2 items-center'>
-                                <div className=''> Birthday </div>
-                                <div>
-                                    <div className='flex flex-row py-1.5 px-4 border-[1px] border-gray-200 rounded-lg outline-none items-center space-x-3 focus-within:border-blue-400 focus-within:border-2 text-sm' >
-                                        <div>
-                                            <svg height={22} width={22}>{IMAGES.icon.calendar}</svg>
-                                        </div>
-                                        <Controller
-                                            control={control}
-                                            name='dateOfBirth'
-                                            defaultValue={new Date()}
-                                            render={(e: any) => ( 
-                                                <DatePicker
-                                                    onChange={(date) => e.field.onChange(date)}
-                                                    selected={e.field.value}
-                                                    className='outline-none disabled:bg-white'
-                                                />
-                                            )}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            {errors?.dateOfBirth?.type === 'required' && <p>⚠ This field is required!</p>}
-                        </div>
                         <div className='grid grid-cols-2 gap-2 '>
-                            <div className='mb-3'>
-                                <div className='space-y-2 items-center'>
-                                    <div className=''> Username </div>
-                                    <div className='px-2'>
-                                        <input
-                                            id='username'
-                                            className=' w-full pl-2 outline-none text-base text-[#757575] border-2 py-1 px-3 rounded-lg'
-                                            type='username'
-                                            placeholder='User name'
-                                            {...register('username', { required: true, minLength: 6 })}
-                                        />
-                                    </div>
-                                </div>
-                                {errors?.username?.type === 'required' && <p>⚠ This field is required!</p>}
-                            </div>
                             <div className='mb-3'>
                                 <div className='space-y-2 items-center'>
                                     <div className=''> Password </div>
@@ -214,7 +144,9 @@ export default function OwnerRegisterPage() {
                                         />
                                     </div>
                                 </div>
-                                {errors?.password?.type === 'required' && <p>⚠ This field is required!</p>}
+                                {errors.password && errors.password.type === 'required' && <p>⚠ This field is required!</p>}
+                                {errors.password && errors.password.type === 'minLength' && <p>⚠ Password cannot be less than 6 characters!</p>}
+
                             </div>
                         </div>
 
@@ -227,7 +159,7 @@ export default function OwnerRegisterPage() {
                                 Have account?
                               </span>
                             </div>
-                            <button
+                            <button                               
                                 type='submit'
                                 className='block w-1/2 bg-indigo-600 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2'
                             >
