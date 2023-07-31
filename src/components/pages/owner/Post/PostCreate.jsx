@@ -2,8 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import { useForm } from "react-hook-form";
+import {toast} from 'react-toastify';
 import Select from 'react-select';
 import { ADVERTISEMENT_TYPE } from "../../../../utils/enum/post_type.enum";
+import { postCreate } from "../../../../api/owner/post";
+
 const options = [
     { value: ADVERTISEMENT_TYPE.TIM_PHONG_TRO, label: 'Tìm phòng trọ' },
     { value: ADVERTISEMENT_TYPE.CHO_THUE_NHA, label: 'Cho thuê nhà' },
@@ -18,6 +21,7 @@ export default function PostCreate() {
         register,
         handleSubmit,
         formState: { errors },
+        setValue
     } = useForm();
 
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -26,19 +30,27 @@ export default function PostCreate() {
         setUploadedImages(updatedFiles);
       };
     const onSubmit = async (data) => {
-
+        console.log(data);
+        console.log(uploadedImages)
+        const result = await postCreate(token, data, uploadedImages);
+        if (result.success) {
+            toast.success(result.message);
+            navigate("/owner/post");
+        } else {
+            toast.error(result.message);
+        }
     }
 
     return (
         <div>
             <h1 className='text-gray-800 font-bold text-4xl mb-5 underline'>Tạo bản tin mới</h1>
-            <form onSubmit={handleSubmit(onsubmit)} >
+            <form onSubmit={handleSubmit(onSubmit)} >
                 <div className='grid grid-cols-3 px-[0px] mt-[10px] '>
                     <div className='px-2'>
                         <div className="text-xl font-extrabold"> Loại </div>
                         <Select className="mt-[5px] ml-[20px]" options={options} onChange={(e) => {
                             console.log(e)
-                            register.type = e.value;
+                            setValue('type', e.value);
                         }} />
                     </div>
                 </div>
@@ -115,6 +127,12 @@ export default function PostCreate() {
                         }}/>
                     </div>
                 </div>
+                <button                               
+                    type='submit'
+                    className='block w-1/6 mt-[20px] ml-[80%] bg-indigo-600 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2'
+                >
+                    Create
+                </button>
 
             </form>
         </div>

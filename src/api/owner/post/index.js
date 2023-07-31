@@ -5,16 +5,22 @@ function getFormData(object, formData) {
     Object.keys(object).forEach(key => formData.append(key, object[key]));
 }
 
-export const postCreate = async (token, data) => {
+export const postCreate = async (token, data, images) => {
     try {
+        console.log(data)
+        console.log(images)
         const formData = new FormData();
         getFormData(data, formData);
-        data.forEach((file, index) => {
+
+        images.forEach((file, index) => {
             if (file) {
                 formData.append(`file`, file);
             }
         });
-        const result = await axios.post(`${baseAdminURL}/advertisement`, data, {
+
+        console.log(formData);
+
+        const result = await axios.post(`${baseAdminURL}/advertisement`, formData, {
             headers: {
                 accept: '*/*',
                 authorization: `Bearer ${token}`,
@@ -24,15 +30,17 @@ export const postCreate = async (token, data) => {
         return {
             success: true,
             data: result.data,
-            message: result.message
+            message: 'Create Post successful'
         };
     } catch (error) {
+        console.log(error)
         let message = '';
+        message = error.response.data.message;
         if (axios.isAxiosError(error)) {
             return {
                 success: false,
                 data: null,
-                message: error.response.data.error
+                message: message
             };
         } else {
             return {
