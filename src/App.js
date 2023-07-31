@@ -3,6 +3,7 @@ import { routes } from "./routes";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { toast } from "react-toastify";
+import './App.css';
 export default function App() {
   const element = useRoutes(routes);
   const { isLogin, role } = useContext(AuthContext);

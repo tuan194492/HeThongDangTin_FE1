@@ -2,54 +2,73 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css" 
 import { AuthContext } from '../../../../context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
-import { getAllUser } from '../../../../api/admin/user/request';
+import { getOwnerPost } from "../../../../api/owner/post";
+
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
+
+const getRoomTypeLabel = (number) => {
+    if (number === '1') 
+        return 'Tìm phòng trọ';
+    else if (number === '2')
+        return 'Cho thuê nhà';
+    else 
+        return 'Bán bất động sản';
+}
+
+const legendData = [
+    {item:'O', color: 'green', label: 'Outstanding' },
+    {item:'P', color: 'blue', label: 'Pending Approve' },
+    {item:'R', color: 'red', label: 'Rejected' },
+    {item:'D', color: 'gray', label: 'Deleted' },
+  ];
+
 const columns = [{
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'Id',
+    accessor: 'id',
     Cell: props => <span className='number'>{props.value ? props.value : 'Undifined'}</span>
   }, {
-    Header: 'Age',
-    accessor: 'age',
-    Cell: props => <span className='number'>{props.value}</span> // Tùy biến component Cell.
+    Header: 'Type',
+    accessor: 'type',
+    Cell: props => <span className='text'>{getRoomTypeLabel(props.value)}</span> // Tùy biến component Cell.
   },
   {
     Header: 'Status',
     accessor: 'status',
   },
   {
-    Header: 'Zalo number',
-    accessor: 'zalo_number'
+    Header: 'Title',
+    accessor: 'title'
   },
   {
-    Header: 'Action',
-    accessor: 'Button',
-    Cell: props => <div className="flex gap-x-5">
-        <button className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl">Active</button>
-        <button className="flex items-center justify-center px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 text-xl">Disable</button>
-    </div>
-  }
+    Header: 'Price',
+    accessor: 'price',
+    Cell: props => <span className='text'>{props.value ? props.value : 0} (VND)</span> // Tùy biến component Cell.
+  },
+  {
+    Header: 'Create date time',
+    accessor: 'createdAt',
+    Cell: props => <span className='text'>{props.value}</span> // Tùy biến component Cell.
+  },
 ]
 
 export default function PostManager() {
-    const [userList, setUserList] = useState();
+    const [postList, setPostList] = useState([]);
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
-    const fetchUserData = async () => {
-        const result = await getAllUser(token);
+    const fetchPostData = async () => {
+        const result = await getOwnerPost(token);
         if (!result.success) {
             toast.error(result.message);
         } else {
-            console.log(result.data);
-            setUserList(result.data);
+            setPostList(result.data);
         }
     }
 
     useEffect(() => {
-        fetchUserData();
+        fetchPostData();
     }, []);
 
     return (
@@ -64,10 +83,23 @@ export default function PostManager() {
                 </button>
             </div>
             <ReactTable 
-                data={userList}
+                data={postList}
                 columns={columns}
-                defaultPageSize={5}
+                defaultPageSize={20}
                 />
+            <div>
+                <ul>
+                    {legendData.map((item, index) => (
+                    <li key={index}>
+                        {item.item} 
+                        <span style={{ backgroundColor: item.color, width: '10px', height: '10px', display: 'inline-block', marginRight: '5px', marginLeft: '10px' }}></span>
+                        {item.label}
+                    </li>
+                    ))}
+                </ul>
+            </div>
         </div>
+
+        
     )
 }
