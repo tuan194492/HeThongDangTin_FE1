@@ -19,10 +19,10 @@ const getRoomTypeLabel = (number) => {
 }
 
 const legendData = [
-    {item:'O', color: 'green', label: 'Outstanding' },
-    {item:'P', color: 'blue', label: 'Pending Approve' },
-    {item:'R', color: 'red', label: 'Rejected' },
-    {item:'D', color: 'gray', label: 'Deleted' },
+    {item:'O', color: 'green', label: 'Đang được quảng cáo' },
+    {item:'P', color: 'blue', label: 'Đang chờ phê duyệt' },
+    {item:'R', color: 'red', label: 'Bị từ chối' },
+    {item:'D', color: 'gray', label: 'Đã xóa' },
   ];
 
 const columns = [{
