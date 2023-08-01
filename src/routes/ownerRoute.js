@@ -1,6 +1,7 @@
 import {IMAGES} from "../utils/images/images";
 import PostCreate from "../components/pages/owner/Post/PostCreate";
 import PostManager from "../components/pages/owner/Post/PostManager";
+import { PostDetail } from "../components/pages/owner/Post/PostDetail";
 export const ownerRoute = [
     {
         title: 'Dashboard',
@@ -14,7 +15,9 @@ export const ownerRoute = [
         title: 'Post',
         path: '/owner/post',
         icon: IMAGES.icon.voucher,
-        subRoute: [],
+        subRoute: [
+            
+        ],
         element: <PostManager/>,
         able : 1
     },
@@ -25,4 +28,8 @@ export const ownerExtraRoute = [
         path: '/owner/post/create',
         element: <PostCreate/>
     },
+    {
+        path: '/owner/post/:id',
+        element: <PostDetail />
+    }
 ]

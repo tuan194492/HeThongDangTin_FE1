@@ -67,6 +67,12 @@ export default function PostManager() {
         }
     }
 
+    const filterMethod = (filter, row, column) => {
+        const id = filter.pivotId || filter.id
+        return row[id] !== undefined ? String(row[id]).includes(filter.value) : true
+    }
+
+
     useEffect(() => {
         fetchPostData();
     }, []);
@@ -83,9 +89,22 @@ export default function PostManager() {
                 </button>
             </div>
             <ReactTable 
+                getTrProps={(state, rowInfo, instance) => {
+                    if (rowInfo) {
+                        return {
+                            onClick: (e) => {
+                                navigate(`/owner/post/${rowInfo.original.id}`)
+                            }
+                        }
+                    }
+                    return {}  
+                }}
                 data={postList}
                 columns={columns}
                 defaultPageSize={20}
+                filterable={true}
+                defaultFilterMethod={filterMethod}
+                minRows={10}
                 />
             <div>
                 <ul>

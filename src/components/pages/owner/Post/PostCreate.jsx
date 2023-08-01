@@ -63,7 +63,7 @@ export default function PostCreate() {
                         rows={4}
                         {...register('title', { required: true })}
                     />
-                    {errors.title && <p>'Title is required'</p>}
+                    {errors.title && <p className="text-red-600 ml-[20px]">'Title is required'</p>}
                 </div>
 
                 <div className='px-2 mt-[10px]'>
@@ -75,7 +75,7 @@ export default function PostCreate() {
                         rows={4}
                         {...register('remark', { required: true })}
                     />
-                    {errors.remark && <p>'Remark is required'</p>}
+                    {errors.remark && <p className="text-red-600 ml-[20px]">'Remark is required'</p>}
                 </div>
 
                 <div className='px-2 mt-[10px]'>
@@ -87,7 +87,7 @@ export default function PostCreate() {
                         className="w-full px-3 py-2 border rounded-lg resize-none ml-[20px] mt-[10px]"
                         {...register('address', { required: true })}
                     />
-                    {errors.address && <p>'Address is required'</p>}
+                    {errors.address && <p className="text-red-600 ml-[20px]">'Address is required'</p>}
                 </div>
 
                 <div className='px-2 mt-[10px]'>
@@ -99,7 +99,7 @@ export default function PostCreate() {
                         className="w-full px-3 py-2 border rounded-lg resize-none ml-[20px] mt-[10px]"
                         {...register('price', { required: true })}
                     />
-                    {errors.price && <p>'Price is required'</p>}
+                    {errors.price && <p className="text-red-600 ml-[20px]">'Price is required'</p>}
                 </div>
 
                 <div className="mt-[30px]">
@@ -110,7 +110,7 @@ export default function PostCreate() {
                             return (
                                 <li key={index} className='list-none col-span-4 flex flex-row items-start'>
                                     <img className="object-cover h-48 w-96" src={URL.createObjectURL(uploadedImages[index])} alt='Please'/>
-                                    <button type='button' className='mx-[-22px] my-[-8px] px-2 font-bold rounded-md text-red-500 items-center text-xl hover:text-2xl' onClick={() => handleDelete(uploadedImage)}> x </button>
+                                    <button type='button' className='mx-[-22px] my-[-8px] px-2 font-bold rounded-md text-red-600 ml-[20px]-500 items-center text-xl hover:text-2xl' onClick={() => handleDelete(uploadedImage)}> x </button>
                                 </li>
                             )    
                         })    

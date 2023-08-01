@@ -85,4 +85,36 @@ export const getOwnerPost = async (token) => {
     }
 }
 
+export const getPostById = async (token, id) => {
+    try {
+        const result = await axios.get(`${baseAdminURL}/advertisement/${id}`, {
+            headers: {
+                accept: '*/*',
+                authorization: `Bearer ${token}`,
+                'content-type': 'application/json'
+            }
+        });
+        return {
+            success: true,
+            data: result.data,
+            message: 'Get post successful'
+        };
+    } catch (error) {
+        let message = '';
+        message = error.response.data.message;
+        if (axios.isAxiosError(error)) {
+            return {
+                success: false,
+                data: null,
+                message: message
+            };
+        } else {
+            return {
+                success: false,
+                message: 'Network error',
+                data: null
+            };
+        }
+    }
+}
 
