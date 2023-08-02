@@ -33,3 +33,38 @@ export const getOwnerPost = async (token) => {
         }
     }
 }
+
+export const approvePost = async (token, postId) => {
+    try {
+        const result = await axios.post(`${baseAdminURL}/advertisement/approve/${postId}`, {} , {
+            headers: {
+                accept: '*/*',
+                authorization: `Bearer ${token}`,
+                'content-type': 'application/json'
+            }
+        });
+        console.log(result)
+        return {
+            success: true,
+            data: result.data.data,
+            message: `Approve post ${postId} successful`
+        };
+    } catch (error) {
+        let message = '';
+        console.log(error)
+        message = error.response.data.message;
+        if (axios.isAxiosError(error)) {
+            return {
+                success: false,
+                data: null,
+                message: message
+            };
+        } else {
+            return {
+                success: false,
+                message: 'Network error',
+                data: null
+            };
+        }
+    }
+}

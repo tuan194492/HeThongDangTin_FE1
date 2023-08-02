@@ -2,7 +2,7 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css" 
 import { AuthContext } from '../../../../context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
-import { getOwnerPost } from "../../../../api/admin/post/request";
+import { getOwnerPost, approvePost } from "../../../../api/admin/post/request";
 
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -58,23 +58,43 @@ const columns = [{
     accessor: 'Button',
     width: 200,
     Cell: props => <div className="flex gap-x-5 justify-between">
-        <button title="Approve" className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faCheck} className="" /></button>
+        <button title="Approve" onClick={(e) => handleApprove(e, props)} className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faCheck} className="" /></button>
         <button title="Reject" className="flex items-center justify-center px-3 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faBan} className="" /></button>
         <button title="Delete" className="flex items-center justify-center px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faTrash} className="" /></button>
     </div>
   }
 ]
 
+let handleApprove = (e, props) => {
+    
+};
+
 export default function PostManager() {
     const [postList, setPostList] = useState([]);
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
+
+
     const fetchPostData = async () => {
         const result = await getOwnerPost(token);
         if (!result.success) {
             toast.error(result.message);
         } else {
             setPostList(result.data);
+        }
+    }
+
+    const initFunction = () => {
+        handleApprove = async (e, props) => {
+            e.stopPropagation();
+            const result = await approvePost(token, props.row.id);
+            console.log(result)
+            if (!result.success) {
+                toast.error(result.message);
+            } else {
+                toast.success(result.message);
+            }
+            
         }
     }
 
@@ -86,6 +106,7 @@ export default function PostManager() {
 
     useEffect(() => {
         fetchPostData();
+        initFunction();
     }, []);
 
     return (
