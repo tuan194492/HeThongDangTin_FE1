@@ -6,7 +6,7 @@ import { getOwnerPost } from "../../../../api/admin/post/request";
 
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faBan, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 
 const getRoomTypeLabel = (number) => {
@@ -37,6 +37,7 @@ const columns = [{
   {
     Header: 'Status',
     accessor: 'status',
+    width: 80,
   },
   {
     Header: 'Title',
@@ -52,6 +53,16 @@ const columns = [{
     accessor: 'createdAt',
     Cell: props => <span className='text'>{props.value}</span> // Tùy biến component Cell.
   },
+  {
+    Header: 'Action',
+    accessor: 'Button',
+    width: 200,
+    Cell: props => <div className="flex gap-x-5 justify-between">
+        <button title="Approve" className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faCheck} className="" /></button>
+        <button title="Reject" className="flex items-center justify-center px-3 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faBan} className="" /></button>
+        <button title="Delete" className="flex items-center justify-center px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faTrash} className="" /></button>
+    </div>
+  }
 ]
 
 export default function PostManager() {
@@ -81,19 +92,13 @@ export default function PostManager() {
         <div className="w-full">         
            <div className="text-4xl font-extrabold flex justify-between py-8">
                 <p>Quản lý danh sách bản tin</p>
-                <button className="flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"
-                        onClick={(e) => {
-                            navigate('/owner/post/create');
-                        }}>
-                    <FontAwesomeIcon icon={faPlus} className="" />
-                </button>
             </div>
             <ReactTable 
                 getTrProps={(state, rowInfo, instance) => {
                     if (rowInfo) {
                         return {
                             onClick: (e) => {
-                                navigate(`/owner/post/${rowInfo.original.id}`)
+                                navigate(`/admin/post/${rowInfo.original.id}`)
                             }
                         }
                     }

@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { getAllUser } from '../../../../api/admin/user/request';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 
 const columns = [{
     Header: 'Name',
@@ -19,6 +19,7 @@ const columns = [{
   {
     Header: 'Status',
     accessor: 'status',
+    width: 80,
   },
   {
     Header: 'Zalo number',
@@ -27,9 +28,10 @@ const columns = [{
   {
     Header: 'Action',
     accessor: 'Button',
+    width: 140,
     Cell: props => <div className="flex gap-x-5">
-        <button className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl">Active</button>
-        <button className="flex items-center justify-center px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 text-xl">Disable</button>
+        <button className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faUnlock}/></button>
+        <button className="flex items-center justify-center px-3 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faLock}/></button>
     </div>
   }
 ]
@@ -55,12 +57,7 @@ export default function UserManage() {
         <div className="w-full">         
            <div className="text-3xl font-extrabold flex justify-between py-8">
                 <p>User Manager</p>
-                <button className="flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"
-                        onClick={(e) => {
-                            // navigate('/admin/user/create');
-                        }}>
-                    <FontAwesomeIcon icon={faPlus} className="" />
-                </button>
+                
             </div>
             <ReactTable 
                 data={userList}
