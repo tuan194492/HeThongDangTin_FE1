@@ -1,6 +1,7 @@
 import {IMAGES} from "../utils/images/images";
 import UserManage from "../components/pages/admin/user/UserManage";
-
+import PostManager from "../components/pages/admin/post/PostManager";
+import { PostDetail } from "../components/pages/owner/Post/PostDetail";
 export const adminRoute = [
     {
         title: 'Dashboard',
@@ -23,11 +24,14 @@ export const adminRoute = [
         path: '/admin/post',
         icon: IMAGES.icon.voucher,
         subRoute: [],
-        element: <div/>,
+        element: <PostManager/>,
         able : 1
     },
 ]
 
 export const adminExtraRoute = [
-    
+    {
+        path: '/admin/post/:id',
+        element: <PostDetail />
+    }
 ]
