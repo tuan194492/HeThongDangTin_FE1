@@ -3,7 +3,7 @@ import 'react-pagination-bar/dist/index.css'
 import { useState, useEffect } from "react"
 import { getAllPostForGuest, getRelatedPostForGuest } from "../../../../api/guest/post/request";
 import { toast } from 'react-toastify';
-
+import PostMini from "./PostMini";
 export default function PostManager () {
     const [currentPage, setCurrentPage] = useState(1);
     const [postData, setPostData] = useState([]);
@@ -11,7 +11,7 @@ export default function PostManager () {
     const fetchPostData = async () => {
         const result = await getAllPostForGuest(currentPage, 5);
         if (result.success) {
-            setPostData(result.data);
+            setPostData(result.data.data.advertisements);
             pageCount = result.data.count;
             console.log(result.data);
         } else {
@@ -25,6 +25,11 @@ export default function PostManager () {
 
     return (
         <div>
+            {
+                postData.map(post => {
+                    return (<PostMini postData={post} />)
+                })       
+            }
             <Pagination
                 currentPage={currentPage}
                 itemsPerPage={5}
