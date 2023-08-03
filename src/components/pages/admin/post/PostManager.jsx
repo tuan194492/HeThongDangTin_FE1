@@ -97,6 +97,8 @@ export default function PostManager() {
             } else {
                 toast.success(result.message);
             }
+
+            await fetchPostData();
             
         }
 
@@ -110,6 +112,7 @@ export default function PostManager() {
                 toast.success(result.message);
             }
             
+            await fetchPostData();
         }
 
         handleDelete = async (e, props) => {
@@ -121,6 +124,8 @@ export default function PostManager() {
             } else {
                 toast.success(result.message);
             }
+
+            await fetchPostData();
             
         }
     }

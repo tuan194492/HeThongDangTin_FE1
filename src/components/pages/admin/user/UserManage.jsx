@@ -2,8 +2,9 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css" 
 import { AuthContext } from '../../../../context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
-import { getAllUser } from '../../../../api/admin/user/request';
 import { toast } from 'react-toastify';
+import { getAllUser } from '../../../../api/admin/user/request';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { activeUser, disableUser } from "../../../../api/admin/user/request";
@@ -46,7 +47,7 @@ let handleDisableUser = (e, props) => {
 };
 
 export default function UserManage() {
-    const [userList, setUserList] = useState();
+    const [userList, setUserList] = useState([]);
     const {token} = useContext(AuthContext);
     const fetchUserData = async () => {
         const result = await getAllUser(token);
@@ -69,6 +70,7 @@ export default function UserManage() {
             } else {
                 toast.success(result.message);
             }
+            await fetchUserData();
             
         }
 
@@ -81,7 +83,7 @@ export default function UserManage() {
             } else {
                 toast.success(result.message);
             }
-            
+            await fetchUserData();
         }
     }
 
@@ -93,7 +95,7 @@ export default function UserManage() {
     return (
         <div className="w-full">         
            <div className="text-3xl font-extrabold flex justify-between py-8">
-                <p>User Manager</p>
+                <p>Quản lý người dùng</p>
                 
             </div>
             <ReactTable 
