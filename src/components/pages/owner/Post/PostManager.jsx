@@ -23,6 +23,7 @@ const legendData = [
     {item:'P', color: 'blue', label: 'Đang chờ phê duyệt' },
     {item:'R', color: 'red', label: 'Bị từ chối' },
     {item:'D', color: 'gray', label: 'Đã xóa' },
+    {item:'U', color: 'orange', label: 'Đang được quảng bá' },
   ];
 
 const columns = [{

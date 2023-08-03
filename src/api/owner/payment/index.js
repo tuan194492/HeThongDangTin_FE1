@@ -100,3 +100,37 @@ export const getAddToAccountHistory = async (token) => {
         }
     }
 }
+
+export const getPaymentHistory = async (token) => {
+    try {
+        const result = await axios.get(`${baseAdminURL}/payment/pay-history`, {
+            headers: {
+                accept: '*/*',
+                authorization: `Bearer ${token}`,
+                'content-type': 'multipart/form-data'
+            }
+        });
+
+        return {
+            success: true,
+            data: result.data,
+            message: 'Get Data successfully!'
+        };
+    } catch (error) {
+        let message = '';
+        console.log(error)
+        if (axios.isAxiosError(error)) {
+            return {
+                success: false,
+                data: null,
+                message: error.response.data.message
+            };
+        } else {
+            return {
+                success: false,
+                message: 'Network error',
+                data: null
+            };
+        }
+    }
+}

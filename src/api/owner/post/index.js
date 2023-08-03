@@ -152,3 +152,41 @@ export const deletePostById = async (token, id) => {
     }
 }
 
+export const upgradePost = async (token, postId) => {
+    try {
+        const result = await axios.post(`${baseAdminURL}/advertisement/upgrade/${postId}`, {
+            dateBegin: new Date(),
+            duration: 60 * 60 * 24,
+            service_type: 'Upgrade Post'
+        } , {
+            headers: {
+                accept: '*/*',
+                authorization: `Bearer ${token}`,
+                'content-type': 'application/json'
+            }
+        });
+        console.log(result)
+        return {
+            success: true,
+            data: result.data.data,
+            message: `Upgrade post ${postId} successful`
+        };
+    } catch (error) {
+        let message = '';
+        console.log(error)
+        message = error.response.data.message || error.response.data.error;
+        if (axios.isAxiosError(error)) {
+            return {
+                success: false,
+                data: null,
+                message: message
+            };
+        } else {
+            return {
+                success: false,
+                message: 'Network error',
+                data: null
+            };
+        }
+    }
+}

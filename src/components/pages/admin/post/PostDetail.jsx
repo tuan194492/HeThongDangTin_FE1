@@ -5,7 +5,7 @@ import { getPostById, deletePostById } from "../../../../api/owner/post";
 import { useParams } from "react-router";
 import ImageSlider from "../../../organisms/common/ImagesSlider";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -70,6 +70,8 @@ export const PostDetail = () => {
     }
   };
 
+  
+
   const handleDelete = async () => {
     confirmAlert({
                     title: 'Confirm to submit',
@@ -111,6 +113,7 @@ export const PostDetail = () => {
           />{" "}
           <h2 className="ml-[5px]">{postData ? postData.createdAt : ""} </h2>
         </h2>
+        
         {
             postData && postData.status == 'O' && 
                 <button
