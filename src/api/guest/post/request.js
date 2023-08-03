@@ -47,6 +47,7 @@ export const getRelatedPostForGuest = async () => {
             message: 'Get post list successful'
         };
     } catch (error) {
+        console.log(error)
         let message = '';
         message = error.response.data.message;
         if (axios.isAxiosError(error)) {

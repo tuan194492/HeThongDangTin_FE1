@@ -1,7 +1,6 @@
-import Navbar from '../../organisms/admin/Navbar';
 import { WrapperAll, WrapperContent} from '../../../style/styled';
 import {Outlet} from "react-router-dom";
-
+import Navbar from '../../organisms/guest/GuestNavBar';
 export default function GuestLayout() {
     return (
         <WrapperAll>
