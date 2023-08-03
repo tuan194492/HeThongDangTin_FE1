@@ -5,7 +5,8 @@ import OwnerLoginPage from "../components/pages/owner/Auth/OwnerLogin";
 import OwnerRegisterPage from "../components/pages/owner/Auth/OwnerRegister";
 import { adminRoute, adminExtraRoute } from "./adminRoutes";
 import { ownerRoute, ownerExtraRoute } from "./ownerRoute";
-
+import { guestRoute } from "./guestRoutes";
+import GuestLayout from "../components/layout/guest/GuestLayout";
 const admin = [...adminRoute], owner = [], guest = [];
 adminRoute.map((e) => {
     if (e.subRoute.length) {
@@ -15,6 +16,11 @@ adminRoute.map((e) => {
     }
     else admin.push({path: e.path, element: e.element})
 })
+
+guestRoute.map((e) => {
+    guest.push({path: e.path, element: e.element})
+})
+
 
 adminExtraRoute.map((e) => {
     admin.push({path: e.path, element: e.element})
@@ -57,8 +63,9 @@ export const routes = [
         element: <OwnerRegisterPage/>
     },
     {
-        path: '/',
-        element: <div/>,
+        path: '/guest',
+        element: <GuestLayout/>,
         children: guest
-    }
+    },
+    
 ];

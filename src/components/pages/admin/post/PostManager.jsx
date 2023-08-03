@@ -57,7 +57,7 @@ const columns = [{
     Header: 'Action',
     accessor: 'Button',
     width: 200,
-    Cell: props => <div className="flex gap-x-5 justify-between">
+    Cell: props => <div className="flex gap-x-5 justify-center">
         {props.row.status == 'P' && <button title="Approve" onClick={(e) => handleApprove(e, props)} className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faCheck} className="" /></button>}
         {props.row.status == 'P' && <button title="Reject" onClick={(e) => handleReject(e, props)} className="flex items-center justify-center px-3 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faBan} className="" /></button> }
         {props.row.status != 'D' && <button title="Delete" onClick={(e) => handleDelete(e, props)} className="flex items-center justify-center px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faTrash} className="" /></button>}
