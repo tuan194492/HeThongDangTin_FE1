@@ -69,7 +69,7 @@ export default function PostManager () {
             <div className="col-span-1">
                 <div className="col-span-2" >
                     <div className="text-4xl font-extrabold flex justify-between px-2 mb-[20px]">
-                        <p>Danh sách bản tin</p>
+                        <p>Tin nổi bật</p>
                     </div>
                 {
                     relatedPostData.map(post => {

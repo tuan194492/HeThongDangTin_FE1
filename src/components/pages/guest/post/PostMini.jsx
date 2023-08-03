@@ -15,7 +15,7 @@ export default function PostMini(props) {
   const {isMini, postData} = props;
   console.log(isMini);
   const navigate = useNavigate();
-  const postUrl = `${baseServerLocation}${ postData.attachments[0].substring(6) }`;
+  const postUrl = postData.attachments[0] ? `${baseServerLocation}${ postData.attachments[0].substring(6) }` : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
   const handleClick = () => {
     navigate(`/guest/post/${postData.id}`)
   }

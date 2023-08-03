@@ -73,7 +73,7 @@ export const PostDetail = () => {
             src="https://img.icons8.com/ios/35/overtime--v1.png"
             alt="overtime--v1"
           />{" "}
-          <h2 className="ml-[5px]">{postData ? postData.createAt : ""} </h2>
+          <h2 className="ml-[5px]">{postData ? postData.createdAt : ""} </h2>
         </h2>
       </div>
 
@@ -163,7 +163,7 @@ export const PostDetail = () => {
                   <img
                     src={
                       postData && postData.avatar && postData.avatar.length > 6
-                        ? `${baseServerLocation}\\${postData.avatar.substring(
+                        ? `${baseServerLocation}\\${postData.user.image.substring(
                             6
                           )}`
                         : "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
@@ -174,10 +174,10 @@ export const PostDetail = () => {
                 </div>
                 <div className="text-center">
                   <h3 className="text-2xl font-bold">
-                    {postData ? postData.name : "Nguyen Quoc Tuan"}
+                    {postData ? postData.user.name : "Nguyen Quoc Tuan"}
                   </h3>
                   <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full mt-1">
-                    {postData ? postData.phone : "No phone"}
+                    {postData ? postData.user.phone_number : "No phone"}
                   </button>
                 </div>
               </div>

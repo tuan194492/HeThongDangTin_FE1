@@ -6,6 +6,8 @@ import { getAllUser } from '../../../../api/admin/user/request';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
+import { activeUser, disableUser } from "../../../../api/admin/user/request";
+
 
 const columns = [{
     Header: 'Name',
@@ -30,11 +32,18 @@ const columns = [{
     accessor: 'Button',
     width: 140,
     Cell: props => <div className="flex gap-x-5">
-        <button className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faUnlock}/></button>
-        <button className="flex items-center justify-center px-3 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faLock}/></button>
+        <button onClick={(e) => handleActiveUser(e, props)} className="ml-[15px] flex items-center justify-center px-3 py-2 text-white bg-green-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faUnlock}/></button>
+        <button onClick={(e) => handleDisableUser(e, props)} className="flex items-center justify-center px-3 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 text-xl"><FontAwesomeIcon icon={faLock}/></button>
     </div>
   }
 ]
+
+let handleActiveUser = (e, props) => {
+
+}
+let handleDisableUser = (e, props) => {
+
+};
 
 export default function UserManage() {
     const [userList, setUserList] = useState();
@@ -49,8 +58,36 @@ export default function UserManage() {
         }
     }
 
+    const initFunction = () => {
+        handleActiveUser = async (e, props) => {
+            e.stopPropagation();
+            console.log(props)
+            const result = await activeUser(token, props.row._original.id);
+            console.log(result)
+            if (!result.success) {
+                toast.error(result.message);
+            } else {
+                toast.success(result.message);
+            }
+            
+        }
+
+        handleDisableUser = async (e, props) => {
+            e.stopPropagation();
+            const result = await disableUser(token, props.row._original.id);
+            console.log(result)
+            if (!result.success) {
+                toast.error(result.message);
+            } else {
+                toast.success(result.message);
+            }
+            
+        }
+    }
+
     useEffect(() => {
         fetchUserData();
+        initFunction();
     }, []);
 
     return (

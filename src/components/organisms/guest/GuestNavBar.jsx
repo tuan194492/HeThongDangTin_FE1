@@ -32,7 +32,11 @@ export default function Navbar() {
 
               
             </div>
-            <button className="md:flex bg-slate-100 items-center  border-2 hover:border-gray-400  px-2 py-1 border-gray-200  rounded-md bg-white hidden">
+            <button
+              onClick={e => {
+                navigate('/owner/login');
+              }}
+              className="md:flex bg-slate-100 items-center  border-2 hover:border-gray-400  px-2 py-1 border-gray-200  rounded-md bg-white hidden">
                 <p className="text-blue-400  mr-[10px]">Login</p>
                 <FontAwesomeIcon icon={faSignIn} className="ml-[10px]"/>
             </button>
