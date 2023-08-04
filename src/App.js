@@ -13,7 +13,7 @@ export default function App() {
     if (!isLogin) {
       if (window.location.href.includes("admin")) navigate("/admin/login");
       else if (window.location.href.includes("owner")) navigate("/owner/login");
-      else navigate("/guest")
+      else navigate("/guest/post")
     }
   }, [isLogin]);
   return <div>{element}</div>;
